@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "/home/armarm/.local/share/virtualenvs/airbnb-clone-EonlX5D7/bin/python",
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Args": [
+        "--max-line-length=88"
+    ]
+}
