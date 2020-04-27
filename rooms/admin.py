@@ -13,7 +13,27 @@ class ItemAdim(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     """RoomAdmin Admin Definition"""
 
-    pass
+    list_display = (
+        "name",
+        "country",
+        "city",
+        "price",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+    )
+
+    list_filter = (
+        "instant_book",
+        "city",
+        "country",
+    )
+    # serch django doucument "MOdelAdmin options"
+    search_fields = ("city", "host__username")
 
 
 @admin.register(models.Photo)
