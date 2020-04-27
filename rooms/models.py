@@ -78,8 +78,8 @@ class Room(core_models.TimeStampedMode):
     # on_delete 는 1대 다만 사용..!
     host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
     room_type = models.ForeignKey(RoomTyte, on_delete=models.SET_NULL, null=True)
-    amenity = models.ManyToManyField(Amenity, blank=True)
-    facility = models.ManyToManyField(Facility, blank=True)
+    amenities = models.ManyToManyField(Amenity, blank=True)
+    facilities = models.ManyToManyField(Facility, blank=True)
     house_rules = models.ManyToManyField(HouseRule, blank=True)
 
     def __str__(self):

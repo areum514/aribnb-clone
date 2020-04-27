@@ -13,6 +13,21 @@ class ItemAdim(admin.ModelAdmin):
 class RoomAdmin(admin.ModelAdmin):
     """RoomAdmin Admin Definition"""
 
+    # more infomation is in dijanfo document!
+    fieldsets = (
+        ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths",)}),
+        ("Basic Info", {"fields": ("name", "description", "country")}),
+        ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
+        (
+            "More About the Space",
+            {
+                "classes": ("collapse",),
+                "fields": ("amenities", "facilities", "house_rules"),
+            },
+        ),
+        ("Last Details", {"fields": ("host",)}),
+    )
+
     list_display = (
         "name",
         "country",
@@ -29,11 +44,24 @@ class RoomAdmin(admin.ModelAdmin):
 
     list_filter = (
         "instant_book",
-        "city",
+        "host__superhost",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
         "country",
+        "city",
     )
     # serch django doucument "MOdelAdmin options"
-    search_fields = ("city", "host__username")
+    search_fields = (
+        "city",
+        "host__username",
+    )
+    filter_horizontal = (
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
 
 
 @admin.register(models.Photo)
