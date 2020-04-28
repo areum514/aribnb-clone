@@ -24,7 +24,7 @@ class User(AbstractUser):
         pass
     """
     # # in django document you can search what tpye of model fields you will use!
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, default=0, blank=True)
     bio = models.TextField(blank=True)  # null=True ignore that empty~
     birthdate = models.DateField(blank=True, null=True)

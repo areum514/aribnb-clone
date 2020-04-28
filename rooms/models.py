@@ -48,7 +48,7 @@ class Photo(core_models.TimeStampedMode):
     """Photo Model Definition"""
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    file = models.ImageField(upload_to="room_photos")
     # Room 이 지워지면 관련된 사진다 지워지게..!!
     # Room이라고 하면 이 class를 밑으로 내려야 되는데 그냥 스트링 선언해주면 알아서 찾아서 매칭해준다...역시 파이션...
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
