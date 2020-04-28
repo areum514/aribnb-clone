@@ -1,12 +1,16 @@
 from django.contrib import admin
 from . import models
 
+# https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#modeladmin-options
 # Register your models here.
 @admin.register(models.RoomTyte, models.Facility, models.HouseRule, models.Amenity)
 class ItemAdim(admin.ModelAdmin):
     """Item Admin Definition"""
 
-    pass
+    list_display = ("name", "used_by")
+
+    def used_by(self, obj):
+        return obj.rooms.count()
 
 
 @admin.register(models.Room)
@@ -16,7 +20,7 @@ class RoomAdmin(admin.ModelAdmin):
     # more infomation is in dijanfo document!
     fieldsets = (
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths",)}),
-        ("Basic Info", {"fields": ("name", "description", "country")}),
+        ("Basic Info", {"fields": ("name", "description", "country", "price")}),
         ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
         (
             "More About the Space",
@@ -41,6 +45,7 @@ class RoomAdmin(admin.ModelAdmin):
         "check_out",
         "instant_book",
         "count_amenities",
+        "count_photos",
     )
 
     list_filter = (
@@ -63,12 +68,15 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
     )
-
+    # serch 'QuerySet API'
     def count_amenities(self, obj):
         print(obj.amenities.all())
-        return "poto"
+        return obj.amenities.count()
 
-    count_amenities.short_description = "hihi"
+    # count_amenities.short_description = "hihi"
+
+    def count_photos(self, obj):
+        return obj.photos.count()
 
 
 @admin.register(models.Photo)
