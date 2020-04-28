@@ -14,10 +14,15 @@ class ItemAdim(admin.ModelAdmin):
         return obj.rooms.count()
 
 
+class PhotoInline(admin.TabularInline):  # StackedInline이것도 있다~ 모양만 다르게 보이는 것 !
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
     """RoomAdmin Admin Definition"""
 
+    inlines = (PhotoInline,)
     # more infomation is in dijanfo document!
     fieldsets = (
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths",)}),
@@ -79,6 +84,8 @@ class RoomAdmin(admin.ModelAdmin):
 
     def count_photos(self, obj):
         return obj.photos.count()
+
+    raw_id_fields = ("host",)
 
 
 @admin.register(models.Photo)
