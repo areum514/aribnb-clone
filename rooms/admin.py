@@ -26,7 +26,7 @@ class RoomAdmin(admin.ModelAdmin):
     # more infomation is in dijanfo document!
     fieldsets = (
         ("Spaces", {"fields": ("guests", "beds", "bedrooms", "baths",)}),
-        ("Basic Info", {"fields": ("name", "description", "country", "price")}),
+        ("Basic Info", {"fields": ("name", "description", "country", "city", "price")}),
         ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
         (
             "More About the Space",
