@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.admin.utils import flatten
 from core import models as core_models
 from users import models as user_models
 
