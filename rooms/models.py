@@ -16,7 +16,7 @@ class AbstractItem(core_models.TimeStampedMode):
         return self.name
 
 
-class RoomTyte(AbstractItem):
+class RoomType(AbstractItem):
     """RoomType Model Definition"""
 
     class Meta:
@@ -81,7 +81,7 @@ class Room(core_models.TimeStampedMode):
     )
 
     room_type = models.ForeignKey(
-        RoomTyte, related_name="rooms", on_delete=models.SET_NULL, null=True
+        RoomType, related_name="rooms", on_delete=models.SET_NULL, null=True
     )
     amenities = models.ManyToManyField(Amenity, related_name="rooms", blank=True)
     facilities = models.ManyToManyField(Facility, related_name="rooms", blank=True)
@@ -98,7 +98,8 @@ class Room(core_models.TimeStampedMode):
     def total_rating(self):
         all_reviews = self.reviews.all()
         all_ratings = 0
-
-        for review in all_reviews:
-            all_ratings += review.rating_average()
-        return all_ratings / len(all_reviews)
+        if len(all_reviews) > 0:
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return all_ratings / len(all_reviews)
+        return 0

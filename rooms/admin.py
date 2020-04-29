@@ -4,7 +4,7 @@ from . import models
 
 # https://docs.djangoproject.com/en/3.0/ref/contrib/admin/#modeladmin-options
 # Register your models here.
-@admin.register(models.RoomTyte, models.Facility, models.HouseRule, models.Amenity)
+@admin.register(models.RoomType, models.Facility, models.HouseRule, models.Amenity)
 class ItemAdim(admin.ModelAdmin):
     """Item Admin Definition"""
 
