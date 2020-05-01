@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.http import Http404
+
 # from django.urls import reverse
 from django.utils import timezone
 from django.shortcuts import render  # ,redirect
@@ -40,3 +41,9 @@ class RoomDetail(DetailView):
        # return redirect(reverse("core:home"))
         #return redirect("")
  """
+
+
+def serch(request):
+    city = request.GET.get("city")
+    city = str.capitalize(city)
+    return render(request, "rooms/search.html", {"city": city})
