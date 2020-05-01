@@ -1,9 +1,10 @@
 
 
 from django.views.generic import ListView
-from django.urls import reverse
+from django.http import Http404
+#from django.urls import reverse
 from django.utils import timezone
-from django.shortcuts import render,redirect
+from django.shortcuts import render#,redirect
 from . import models
 
 
@@ -31,5 +32,6 @@ def room_detail(request, pk):
         room = models.Room.objects.get(pk=pk)
         return render(request, "rooms/detail.html", {"room": room})
     except models.Room.DoesNotExist:
-        return redirect(reverse("core:home"))
+        raise Http404 #return render(request, "404.html")이렇게 안해도 debug 모드 false로 하고 template 안에 404.html파일 만들어 놓으면 자동으로 rendering됨... 신기... 
+       # return redirect(reverse("core:home"))
         #return redirect("")
