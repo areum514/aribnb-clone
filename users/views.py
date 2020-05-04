@@ -1,3 +1,25 @@
+from django.views import View
 from django.shortcuts import render
+class LoginView(View):
 
-# Create your views here.
+    def get(self,request):
+        return render(request,"users/login.html")
+    def post(self,request):
+        pass
+
+
+""" 
+두개 같은거임
+class LoginView(View):
+
+    def get(self,request):
+        pass
+    def post(self,request):
+        pass
+
+
+def login_view(request):
+    if request.method=="GET"
+        pass
+    elif request.method="POST"
+        pass """
