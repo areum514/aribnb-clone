@@ -56,8 +56,8 @@ def serch(request):
     bedromms =int(request.GET.get("bedromms",0))
     beds =int(request.GET.get("beds",0))
     baths =int(request.GET.get("baths",0))
-    super_host=request.GET.get("instant",False)
-    instant=request.GET.get("super_host",False)
+    super_host=request.GET.get("super_host",False)
+    instant = request.GET.get("instant", False)
     s_amenities = request.GET.getlist("amenities")
     s_facilities = request.GET.getlist("facilities")
  
