@@ -1,9 +1,11 @@
+
 from django.views.generic import ListView, DetailView
 from django.http import Http404
 
 # from django.urls import reverse
 from django.utils import timezone
 from django.shortcuts import render  # ,redirect
+from django_countries import countries
 from . import models
 
 
@@ -44,6 +46,8 @@ class RoomDetail(DetailView):
 
 
 def serch(request):
-    city = request.GET.get("city")
+    print(vars(request))
+    city = request.GET.get("city", "Anywhere")
     city = str.capitalize(city)
-    return render(request, "rooms/search.html", {"city": city})
+    room_type=models.RoomType.objects.all()
+    return render(request, "rooms/search.html", {"city": city,"countries":countries,"room_types":room_type})

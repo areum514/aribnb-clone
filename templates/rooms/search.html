@@ -2,7 +2,30 @@
 {% block page_title %}
     Search
 {% endblock page_title %}
+    {% block serch-bar %}
+    {% endblock serch-bar %}
 {% block content %}
     <h2>search</h2>
-    <h4>Serching by {{city}}</h4>
+
+    <form method="GET" action="{% url 'rooms:search' %}">
+    <div>
+        <label for="city">City</label>
+        <input value="{{city}}" id="city" name="city" placeholder="Search by City">
+    </div>
+    <div>
+        <label for="country">Country</label>
+        <select id="country" name="country">
+        {% for country in countries  %}
+        <option value={{country.code}}> {{country.name}}</option>
+        {% endfor %}</select>
+    </div>
+    <div>
+        <label for="room_type">room_type</label>
+        <select id="room_type" name="room_type">
+        {% for room_type in room_types  %}
+        <option value={{room_type.pk}}> {{room_type.name}}</option>
+        {% endfor %}</select>
+    </div>
+    <button>Serch</button>
+    </form>
 {% endblock content %}<h2>search</h2>
