@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 {% block page_title %}
-    Search
+Search
 {% endblock page_title %}
-    {% block serch-bar %}
-    {% endblock serch-bar %}
-{% block content %}
-    <h2>search</h2>
+{% block serch-bar %}
+{% endblock serch-bar %}
 
-    <form method="GET" action="{% url 'rooms:search' %}">
+{% block content %}
+<h2>search</h2>
+
+<form method="GET" action="{% url 'rooms:search' %}">
     {{form.as_p}}
 
     <button>Serch</button>
-    </form>
+</form>
 
-    <h3>Results</h3>
+<h3>Results</h3>
 
 {% endblock content %}<h2>search</h2>
