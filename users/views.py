@@ -4,12 +4,14 @@ from . import forms
 class LoginView(View):
 
     def get(self,request):
-        form = forms.LoginForm()
+        form = forms.LoginForm(initial={"email":"21500514@handong.edu"})
         return render(request,"users/login.html",{"form":form})
 
     def post(self,request):
         form=forms.LoginForm(request.POST)
-        print(form)
+        if form.is_valid():
+            print(form.cleaned_data)
+        return render(request,"users/login.html",{"form":form})
 
 
 """ 
