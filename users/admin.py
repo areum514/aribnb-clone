@@ -34,10 +34,10 @@ class CustomUserAdmin(UserAdmin):
     )
     list_display = (
         "username",
-        "avatar",
-        "gender",
-        "bio",
-        "birthdate",
+        "first_name",
+        "last_name",
+        "email",
+        "email_verified",
         "language",
         "currency",
         "superhost",
