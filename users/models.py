@@ -34,3 +34,10 @@ class User(AbstractUser):
     currency = models.CharField(choices=CURRENCY_CHICES, max_length=3, null=True,default=CURRENCY_KRW)
 
     superhost = models.BooleanField(default=False)
+    email_confirmed=models.BooleanField(default=False)
+    email_secret=models.CharField(max_length=120,default="",blank=True)
+    """ email과 password를 이용해서 user가 새 계정을 생성하면 email_secret에  아무 숫자나 넣을꺼야
+    이 랜덤으로 생성한 숫자들을 이메일에 보내는거야 링크를 통해서 user가 그 링크를 클릭하면  (아마 /verify/(랜덤으로 생성된 숫자)) 이 랜덤한 숫자들을 받을 수 있는 view를 만들어서 
+    email_secret값이 이 숫작 ㅏ포함된 user를 찾아볼꺼야 그러면 verify (인증)이 되는 거야   """
+    def verify_email(self):
+        pass
