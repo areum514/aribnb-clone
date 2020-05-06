@@ -23,6 +23,7 @@ def log_out(request):
     logout(request)
     return redirect(reverse("core:home"))
 
+
 class SignUpView(FormView):
     template_name = "users/signup.html"
     form_class=forms.SignUpForm
@@ -30,8 +31,17 @@ class SignUpView(FormView):
     initial={
         'first_name': 'areum',
         'last_name':'lee',
-        'email':'21500514@hnadong.edu'        ,
+        'email':'21500514@hnadong.edu',
     }
+    def form_valid(self,form):
+        form.save()
+        email= form.cleaned_data.get("email")
+        password=form.cleaned_data.get("password")
+        user=authenticate(self.request,username=email,password=password)
+        if user is not None:
+            login(self.request,user)
+        return super().form_valid(form)
+
 """ class LoginView(View):
 
     def get(self,request):
