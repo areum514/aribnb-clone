@@ -12,6 +12,12 @@ django-countries = "*"
 git = "*"
 django-seed = "*"
 django-dotenv = "*"
+requests = "*"
+gitpython = "*"
+lock = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true

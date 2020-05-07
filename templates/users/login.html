@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+
 {% block page_title %}
-Log In
+    Log In
 {% endblock page_title %}
+
 {% block serch-bar %}
 {% endblock serch-bar %}
+
 {% block content %}
 {% include 'partials/social_login.html' %}
 <form method="POST" action="{% url 'users:login' %}">
