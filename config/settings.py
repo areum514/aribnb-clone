@@ -122,8 +122,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+#STATIC_URL = "/static/" 는 그냥 서버 url이다. directory가 아니여서 그냥 potato해도 상관없음 서버 url은 directory랑 상관없다. 그리고 STATICFILES_DIRS는 기본적으로 우리가 /static/에 가면 접근 할 수 잇는 파일을 보여주는 것 
 STATIC_URL = "/static/"
+STATICFILES_DIRS=[os.path.join(BASE_DIR, "static"),]
+
 AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"

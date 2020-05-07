@@ -1,24 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{% block page_title %}
-    
-    {% endblock page_title %}| Nbnb</title>
+
+        {% endblock page_title %}| Nbnb</title>
 </head>
+
 <body>
+
     <head>
-    {% include "partials/nav.html" %}
-    {% block serch-bar %}
-    <form method="GET" action="{% url 'rooms:search' %}">
-        <input name="city" placeholder="Search by City">
-    </form>
-    {% endblock serch-bar %}
+        {% include "partials/nav.html" %}
+        {% block serch-bar %}
+        <form method="GET" action="{% url 'rooms:search' %}">
+            <input name="city" placeholder="Search by City">
+        </form>
+        {% endblock serch-bar %}
     </head>
 
     {% block content %}{% endblock  %}
-     
+
     {% include "partials/footer.html" %}
 </body>
+
 </html>
