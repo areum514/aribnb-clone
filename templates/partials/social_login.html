@@ -1,11 +1,17 @@
 <div class="flex flex-col w-full ">
     <a href="{% url 'users:github-login'  %}"
-        class="w-full border text-center font-medium text-gray-700 rounded-sm py-5 mb-2 border-gray-700 ">
-        <i class="fab fa-github-alt mr-2 fa-lg"></i> Countinue with Github
+        class="btn w-full border font-medium text-gray-700 text-center py-5 mb-2 ">
+        <i class="fab fa-github-alt mr-2"></i> Countinue with Github
     </a>
 
     <a href="{% url 'users:kakao-login'  %}"
-        class="w-full border text-center font-medium bg-yellow-400 text-yellow-600 border-yellow-400 rounded-sm py-5 mb-2">
-        <i class="fas fa-comment mr-2 fa-lg"></i> Countinue with Kakotalk
+        class="btn w-full border font-medium bg-yellow-400 text-yellow-600 border-yellow-400 text-center rounded-sm py-5 mb-2">
+        <i class="fas fa-comment mr-2"></i> Countinue with Kakotalk
     </a>
+</div>
+
+<div class="flex items-center w-full my-5 ">
+    <div class="h-px w-full bg-gray-500 "></div>
+    <span class="text-gray-700 font-bold bg-white mx-2 text-xs " >or</span>
+    <div class="h-px w-full bg-gray-500 "></div>
 </div>
