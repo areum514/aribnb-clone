@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render,redirect,reverse
 from django.core.files.base import ContentFile
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from . import forms,models
 
 
@@ -122,6 +123,7 @@ class KakaoException(Exception):
 def kakao_callback(request):
     try:
         client_id=os.environ.get("KAKAO_ID")
+        raise KakaoException()
         code=request.GET.get("code")
         redirect_uri="http://127.0.0.1:8000/users/login/kakao/callback"
         token_request=requests.get(f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}")
@@ -171,6 +173,7 @@ def kakao_callback(request):
 
         properties = profile_json.get('properties')
     except KakaoException:
+        messages.error(request,"something went wrong")
         return redirect(reverse("users:login"))
 """ class LoginView(View):
 
