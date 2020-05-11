@@ -2,13 +2,86 @@
 {% block page_title %}
 Sign up
 {% endblock page_title %}
+
 {% block serch-bar %}
 {% endblock serch-bar %}
-{% block content %}
 
-<form method="POST" action="{% url 'users:signup' %}">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>Sign up</button>
-</form>
+{% block content %}
+<div class="container lg:w-5/12 md:w-1/2 xl:w-1/4 mx-auto my-10 flex flex-col items-center border p-6 border-gray-400">
+    {% include 'partials/social_login.html' %}
+
+    <form method="POST" action="{% url 'users:signup' %}">
+        {% csrf_token %}
+        <!-- 
+self.add_error("password",forms.ValidationError("Password is wrong"))
+password를 
+None로 하면 됨
+self.add_error(None,forms.ValidationError("Password is wrong")) -->
+
+
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors  %}
+        <span class="text-red-700 font-medium text-small">{{error}}</span>
+        {% endfor %}
+        {% endif %}
+
+
+
+
+        {% for field in form  %}
+        {% include 'partials/form_input.html' with field=field %}
+
+        {% endfor %}
+
+        <!-- 
+        <div class="input">
+
+            {{form.first_name}}
+            {% if form.first_name.errors %}
+            {% for error in form.first_name.errors  %}
+            <span class="text-red-700 font-medium text-small">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="input has_error">
+            {{form.last_name}}
+            {% if form.last_name.errors %}
+            {% for error in form.last_name.errors  %}
+            <span class="text-red-700 font-medium text-small">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="input ">
+            {{form.email}}
+            {% if form.email.errors %}
+            {% for error in form.email.errors  %}
+            <span class="text-red-700 font-medium text-small">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="input">
+            {{form.password}}
+            {% if form.password.errors %}
+            {% for error in form.password.errors  %}
+            <span class="text-red-700 font-medium text-small">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="input">
+            {{form.password1}}
+            {% if form.password1.errors %}
+            {% for error in form.password1.errors  %}
+            <span class="text-red-700 font-medium text-small">{{error}}</span>
+            {% endfor %}
+            {% endif %}
+        </div> -->
+        <button class="btn bg-red-500 text-white ">Sign up</button>
+    </form>
+    <div class="mt-5">
+        <span class="mr-2">Have an account?</span>
+        <a class="font-bold text-teal-500 " href="{% url 'users:login' %}">Log in</a>
+    </div>
+
+
+</div>
 {%endblock content%}
