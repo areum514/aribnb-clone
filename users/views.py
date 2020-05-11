@@ -1,7 +1,7 @@
 import os
 import requests
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView,DetailView
 from django.urls import reverse_lazy
 from django.shortcuts import render,redirect,reverse
 from django.core.files.base import ContentFile
@@ -25,6 +25,7 @@ class LoginView(FormView):
     
 def log_out(request):
     logout(request)
+    messages.info(request,"log out")
     return redirect(reverse("core:home"))
 
 class SignUpView(FormView):
@@ -211,3 +212,6 @@ def login_view(request):
         pass
     elif request.method="POST"
         pass """
+class UserProfileView(DetailView):
+    model = models.User
+    context_object_name = "user_obj"

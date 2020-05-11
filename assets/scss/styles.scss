@@ -1,34 +1,69 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+
+
+    @keyframes messageFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      5% {
+        opacity: 1;
+        transform: translateY(50px);
+      }
+      95% {
+        opacity: 1;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+    }
+    
+    .message {
+      animation: messageFadeIn 5s ease-in-out forwards;
+      &.error {
+        @apply bg-red-600;
+      }
+      &.info {
+        @apply bg-blue-500;
+      }
+      &.success {
+        @apply bg-green-500;
+      }
+      &.warning {
+        @apply bg-yellow-400;
+      }
+    }
 
 .search-box{
-    transition: box-shadow .2s linear;
+  transition: box-shadow .2s linear;
 }
 
 
 .nav_link {
-    @apply ml-8 border-b-2 border-white h-full flex items-center;
-    a {
-      @apply py-10 px-5;
+  @apply ml-8 border-b-2 border-white h-full flex items-center;
+  a {
+    @apply py-10 px-5;
     }
     &:hover {
       @apply border-gray-600;
     }
   }
-
-.btn {
+  
+  .btn {
     @apply text-center rounded-sm py-5 font-light text-lg w-full;
   }
   
-input {
+  input {
     @apply rounded-sm py-5 font-light text-lg w-full text-left border border-gray-600 px-5 mb-3;
     &:focus {
       @apply outline-none border-teal-500;
     }
   }
-
-form {
+  
+  form {
     .input {
       @apply mb-3;
       &.has_error {
@@ -40,4 +75,6 @@ form {
         }
       }
     }	  
-  }	
+  }
+  
+  @tailwind utilities;
