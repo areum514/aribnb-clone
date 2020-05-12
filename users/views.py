@@ -8,10 +8,11 @@ from django.shortcuts import render,redirect,reverse
 from django.core.files.base import ContentFile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from . import forms,models
+from django.contrib.messages.views import SuccessMessageMixin
+from . import forms,models,mixins
 
 
-class LoginView(FormView):
+class LoginView( mixins.LoggedOutOnlyView, FormView):
     template_name = "users/login.html"
     form_class=forms.LoginForm
     success_url=reverse_lazy("core:home")
@@ -213,14 +214,14 @@ def login_view(request):
         pass
     elif request.method="POST"
         pass """
-class UserProfileView(DetailView):
+class UserProfileView(SuccessMessageMixin,DetailView):
     model = models.User
     context_object_name = "user_obj"
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context["hello"]="Hello!"
         return context
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(SuccessMessageMixin, UpdateView):
     model = models.User
     template_name="users/update-profile.html"
     fields=(
@@ -233,7 +234,7 @@ class UpdateProfileView(UpdateView):
         "language",
         "currency",
     )
-    
+    success_message="Profile updqted!"
     def get_object(self,queryset=None):
         return self.request.user
 
@@ -241,19 +242,23 @@ class UpdateProfileView(UpdateView):
         form= super().get_form(form_class=form_class)
         form.fields["last_name"].widget.attrs={"placeholder":"last_name"}
         return form
+    
 """ 
     def form_valid(self,form):
         email=form.cleaned_date.get("email")
         self.object.usernam=email
         self.object.save()
         return super().form_valid(form) """
-class UpdatePasswordView(PasswordChangeView):
+class UpdatePasswordView(SuccessMessageMixin, PasswordChangeView):
     model=models.User
     template_name="users/update-password.html"
-
+    
     def get_form(self,form_class=None):
         form= super().get_form(form_class=form_class)
         form.fields["old_password"].widget.attrs={"placeholder":"Current password"}
         form.fields["new_password1"].widget.attrs={"placeholder":"New password"}
         form.fields["new_password2"].widget.attrs={"placeholder":"Confirm new password"}
         return form
+
+    def get_success_url(self):
+        return self.reuqst.user.get_absolute_url()
