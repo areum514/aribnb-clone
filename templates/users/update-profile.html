@@ -13,10 +13,12 @@ Update Profile
 
     {% include 'mixins/auth/auth_form.html' with form=form cta="Update profile"%}
 
+    {% if object.login_method == "email"  %}
     <div class="mt-5">
-
-        <a class="font-bold text-teal-500" href="{% url 'users:signup' %}">Change Password</a>
+        <a class="font-bold text-teal-500" href="{% url 'users:password' %}">Change Password</a>
     </div>
+    {% endif %}
+
 
 </div>
 {%endblock content%}
