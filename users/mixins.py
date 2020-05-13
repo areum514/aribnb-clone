@@ -21,5 +21,6 @@ class LoggedOutOnlyView(UserPassesTestMixin):
         messages.error(self.request, "Can't go there")
         return redirect("core:home")
 
+
 class LoggedInOnlyView(LoginRequiredMixin):
     login_url=reverse_lazy("users:login")
