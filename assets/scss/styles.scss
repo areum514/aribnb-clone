@@ -92,4 +92,8 @@ select {
   select {
     height: 50px;
   }
-  @tailwind utilities;
+.border-section{
+  @apply border-b border-gray-400 pb-8 mt-8;
+}
+
+@tailwind utilities;
