@@ -1,17 +1,14 @@
 
-from django.views.generic import ListView, DetailView,View, UpdateView
 from django.http import Http404
-
-# from django.urls import reverse
-from django.utils import timezone
+from django.views.generic import ListView, DetailView,View, UpdateView,FormView
 from django.shortcuts import render, redirect, reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django_countries import countries
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from . import models, forms
+
 from users import mixins as users_mixins
+from . import models, forms
 # Create your views here.
 
 
@@ -24,11 +21,6 @@ class HomeView(ListView):
     ordering = "created"
     context_object_name = "rooms"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        now = timezone.now()
-        context["now"] = now
-        return context
 
 
 class RoomDetail(DetailView):
@@ -168,3 +160,16 @@ class EditPhotoView(users_mixins.LoggedInOnlyView,SuccessMessageMixin, UpdateVie
     def get_success_url(self):
         room_pk= self.kwargs.get("room_pk")
         return reverse("rooms:photos", kwargs={"pk": room_pk})
+
+class AddPhotoView(users_mixins.LoggedInOnlyView,SuccessMessageMixin, FormView):
+    model = models.Photo
+    template_name = "rooms/photo_create.html"
+    fields= ("caption","file", )
+
+    form_class = forms.CreatePhotoForm
+    
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")
+        form.save(pk)
+        messages.success(self.request,"Photo Uploade")
+        return redirect(reverse("rooms:photos",kwargs={"pk":pk}))
