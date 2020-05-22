@@ -31,6 +31,6 @@ class Command(BaseCommand):
         for pk in clean:
             lists_model = lists_models.List.objects.get(pk=pk)
             to_add = rooms[random.randint(0, 5) : random.randint(6, 30)]
-            lists_model.rooms.add(*to_add)
+            lists_model.rooms.add(*to_add)  # 어레이 안에 있는 요소를 얻기 위해..
 
         self.stdout.write(self.style.SUCCESS(f"{number} lists created!"))

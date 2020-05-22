@@ -1,5 +1,5 @@
 
-from django.views.generic import ListView, DetailView,View
+from django.views.generic import ListView, DetailView,View, UpdateView
 from django.http import Http404
 
 # from django.urls import reverse
@@ -111,3 +111,27 @@ class SearchView(View):
             
         
         return render(request, "rooms/search.html", {"form":form})
+
+class EditRoomView(UpdateView):
+    model= models.Room
+    fields=(
+"name",
+"description",
+"country",
+"city",
+"price",
+"address",
+"guests",
+"beds",
+"bedrooms",
+"baths",
+"check_in",
+"check_out",
+"instant_book",
+"room_type",
+"amenities",
+"house_rules",
+"facilities",
+
+    )
+    template_name= 'rooms/room_edit.html'

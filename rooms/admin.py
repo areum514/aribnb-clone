@@ -70,11 +70,13 @@ class RoomAdmin(admin.ModelAdmin):
         "city",
         "host__username",
     )
+
     filter_horizontal = (
         "amenities",
         "facilities",
         "house_rules",
     )
+
     # serch 'QuerySet API'
     def count_amenities(self, obj):
         print(obj.amenities.all())

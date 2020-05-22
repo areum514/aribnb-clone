@@ -49,7 +49,7 @@ PROJECT_APPS = [
 
 THIRD_PARTY_APPS = ["django_countries", "django_seed"]
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -122,18 +122,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-#STATIC_URL = "/static/" 는 그냥 서버 url이다. directory가 아니여서 그냥 potato해도 상관없음 서버 url은 directory랑 상관없다. 그리고 STATICFILES_DIRS는 기본적으로 우리가 /static/에 가면 접근 할 수 잇는 파일을 보여주는 것 
+# STATIC_URL = "/static/" 는 그냥 서버 url이다. directory가 아니여서 그냥 potato해도 상관없음 서버 url은 directory랑 상관없다. 그리고 STATICFILES_DIRS는 기본적으로 우리가 /static/에 가면 접근 할 수 잇는 파일을 보여주는 것
 STATIC_URL = "/static/"
-STATICFILES_DIRS=[os.path.join(BASE_DIR, "static"),]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
 
-#Email Configration
+# Email Configration
 
-EMAIL_HOST="smtp.mailgun.org"
-EMAIL_PORT="587"
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = "587"
 EMAIL_HOST_USER = os.environ.get("MAINGUN_USERNAME")
 EMAIL_HOST_PASSWORD = os.environ.get("MAINGUN_PASSWORD")
-EMAIL_FROM="airbnbmanage@sandbox407b22f18fe646f4af961b52c8c4a30e.mailgun.org"
+EMAIL_FROM = "airbnbmanage@sandbox407b22f18fe646f4af961b52c8c4a30e.mailgun.org"
