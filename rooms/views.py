@@ -8,6 +8,7 @@ from django.shortcuts import render  # ,redirect
 from django.core.paginator import Paginator
 from django_countries import countries
 from . import models,forms
+from users import mixins as users_mixins
 # Create your views here.
 
 
@@ -32,16 +33,6 @@ class RoomDetail(DetailView):
 
     model = models.Room
 
-
-""" def room_detail(request, pk):
-    try:
-        room = models.Room.objects.get(pk=pk)
-        return render(request, "rooms/detail.html", {"room": room})
-    except models.Room.DoesNotExist:
-        raise Http404 #return render(request, "404.html")이렇게 안해도 debug 모드 false로 하고 template 안에 404.html파일 만들어 놓으면 자동으로 rendering됨...
-       # return redirect(reverse("core:home"))
-        #return redirect("")
- """
 class SearchView(View):
     def get(self,request):
         country=request.GET.get("country")
@@ -112,26 +103,40 @@ class SearchView(View):
         
         return render(request, "rooms/search.html", {"form":form})
 
-class EditRoomView(UpdateView):
+class EditRoomView(users_mixins.LoggedInOnlyView,UpdateView):
     model= models.Room
-    fields=(
-"name",
-"description",
-"country",
-"city",
-"price",
-"address",
-"guests",
-"beds",
-"bedrooms",
-"baths",
-"check_in",
-"check_out",
-"instant_book",
-"room_type",
-"amenities",
-"house_rules",
-"facilities",
-
-    )
     template_name= 'rooms/room_edit.html'
+    fields=(
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "house_rules",
+        "facilities",
+    )
+    
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset=queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404
+        return room
+class RoomPhtosView(users_mixins.LoggedInOnlyView,DetailView):
+    model= models.Room
+    template_name="rooms/room_photos.html"
+    def get_object(self, queryset=None):
+        room = super().get_object(queryset=queryset)
+        if room.host.pk != self.request.user.pk:
+            raise Http404
+        return room
+    
