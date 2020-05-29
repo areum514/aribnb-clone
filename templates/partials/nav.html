@@ -10,8 +10,16 @@
             {% endif %}
         </a>
     </li>
-    {% if request.session.is_hosting %}
+    {% if not request.session.is_hosting %}
     <li class="nav_link"><a href="{% url 'rooms:create' %}">Uplaod Room</a></li>
+    {% for calendar in room.get_calendars %}
+    <div>
+        {{calendar.get_month}}/{{calendar.year}}
+        {% for day in calendar.day_names  %}
+        {{day}}
+        {% endfor %}
+    </div>
+    {% endfor %}
     {% endif %}
     <li class="nav_link"><a href="{{user.get_absolute_url}}">Profile</a></li>
     <li class="nav_link"><a href="{% url "users:logout" %}">Logout</a></li>
