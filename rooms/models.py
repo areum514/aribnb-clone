@@ -38,7 +38,7 @@ class Facility(AbstractItem):
     """Facility Model Definition"""
 
     class Meta:
-        "Facilities"
+        verbose_name_plural = "Facilities"
 
 
 class HouseRule(AbstractItem):

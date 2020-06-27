@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = "kywim9cf)oh@z7cqtct1=dd&5pg0dzag^)s68)t487k5*zpd8o"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG"))
 
 ALLOWED_HOSTS = []
 
@@ -84,13 +84,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+if DEBUG:
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
+else:
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "HOST": os.environ.get("RDS_HOST"),
+            "NAME": os.environ.get("RDS_NAME"),
+            "USER": os.environ.get("RDS_USER"),
+            "PASSWORD": os.environ.get("RDS_PASSWORD"),
+            "PORT": "5432",
+        }
+    }
 
 
 # Password validation
@@ -141,4 +154,3 @@ EMAIL_PORT = "587"
 EMAIL_FROM = "airbnbmanage@sandbox407b22f18fe646f4af961b52c8c4a30e.mailgun.org"
 
 LOGIN_URL = "/users/login"
-
