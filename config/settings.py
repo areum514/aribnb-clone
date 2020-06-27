@@ -25,7 +25,7 @@ SECRET_KEY = "kywim9cf)oh@z7cqtct1=dd&5pg0dzag^)s68)t487k5*zpd8o"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG"))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".elasticbeanstalk.com"]
 
 
 # Application definition
@@ -94,7 +94,7 @@ if DEBUG:
     }
 else:
 
-    DATABASES = {
+    DATABASESd = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "HOST": os.environ.get("RDS_HOST"),
